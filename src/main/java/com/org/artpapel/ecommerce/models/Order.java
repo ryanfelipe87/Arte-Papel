@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -23,4 +24,14 @@ public class Order {
 
     @Enumerated(EnumType.STRING)
     private StatusType status;
+
+    @ManyToOne
+    @JoinColumn(name = "id_client")
+    private Client client;
+
+    @OneToMany(mappedBy = "order")
+    private List<ItemOrder> itemOrders;
+
+    @OneToOne(mappedBy = "order")
+    private Payment payment;
 }

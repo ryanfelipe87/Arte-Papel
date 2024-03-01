@@ -23,4 +23,8 @@ public class Payment {
     @Enumerated(EnumType.STRING)
     private StatusType status;
     private LocalDateTime datePayment;
+
+    @OneToOne
+    @JoinColumn(name = "id_order")
+    private Order order;
 }

@@ -1,15 +1,13 @@
 package com.org.artpapel.ecommerce.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.Email;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -27,4 +25,7 @@ public class Client {
     private String email;
     private String cellPhone;
     private Double balanceMoney;
+
+    @OneToMany(mappedBy = "client")
+    private List<Order> orders;
 }
