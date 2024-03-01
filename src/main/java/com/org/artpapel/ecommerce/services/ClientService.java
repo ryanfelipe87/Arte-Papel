@@ -6,6 +6,9 @@ import com.org.artpapel.ecommerce.repositories.ClientRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ClientService {
 
@@ -19,6 +22,13 @@ public class ClientService {
         Client client = convertToEntity(clientDto);
         client = clientRepository.save(client);
         return convertToDto(client);
+    }
+
+    public List<ClientDto> listAllClients(){
+        List<Client> clients = clientRepository.findAll();
+        return clients.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
     }
 
     private ClientDto convertToDto(Client client){
