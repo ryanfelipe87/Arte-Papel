@@ -28,4 +28,9 @@ public class ClientController {
     public List<ClientDto> listAll(){
         return clientService.listAllClients();
     }
+
+    @GetMapping(path = "/{id}")
+    public ClientDto getClientById(@PathVariable Long id){
+        return clientService.findClientById(id);
+    }
 }

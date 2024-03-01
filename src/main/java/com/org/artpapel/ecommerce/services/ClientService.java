@@ -1,6 +1,7 @@
 package com.org.artpapel.ecommerce.services;
 
 import com.org.artpapel.ecommerce.dtos.ClientDto;
+import com.org.artpapel.ecommerce.exceptions.NotFoundException;
 import com.org.artpapel.ecommerce.models.Client;
 import com.org.artpapel.ecommerce.repositories.ClientRepository;
 import org.springframework.beans.BeanUtils;
@@ -29,6 +30,13 @@ public class ClientService {
         return clients.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
+    }
+
+    public ClientDto findClientById(Long id){
+        Client client = clientRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Client not found with this ID: " + id));
+
+        return convertToDto(client);
     }
 
     private ClientDto convertToDto(Client client){
